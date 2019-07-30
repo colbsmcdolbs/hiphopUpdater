@@ -9,9 +9,9 @@ class Rapper(db.Model):
         return '<Rapper {}>'.format(self.name)
 
 
-class signed_up(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rapper_id = db.Column(db.Integer, index=True)
+    rapper_id = db.Column(db.Integer, index=True, nullable=False)
     email = db.Column(db.String(64), nullable=False)
 
     def __repr__(self):

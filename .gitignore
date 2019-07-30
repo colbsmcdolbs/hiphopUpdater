@@ -6,6 +6,9 @@
 instance/*
 !instance/.gitignore
 .webassets-cache
+.vscode/
+app.db
+*.db
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -110,6 +113,7 @@ celerybeat-schedule
 .venv
 env/
 venv/
+.vscode/
 ENV/
 env.bak/
 venv.bak/
@@ -131,5 +135,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
+/.vscode
 # End of https://www.gitignore.io/api/flask
