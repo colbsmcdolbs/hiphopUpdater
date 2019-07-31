@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/app.css') }}">
+{% endblock %}
+
 {% block content %}
+
     <h1>Welcome to hiphopUpdater</h1>
+    <br />
+    <h3>Trying to quit Reddit but want to stay updated on when Yandhi finally drops?</h3>
+    <p>With hiphopUpdater, you can subscribe to many of your favorite rappers, and our
+        website will scan Reddit every 20 minutes looking for FRESH songs, albums or features 
+        for the Rappers that you have subscribed to.</p>
+    <p>To get started, <a href="{{ url_for('signup') }}">Sign Up Here.</a></p>
 {% endblock %}
