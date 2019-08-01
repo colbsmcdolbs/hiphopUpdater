@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
-from app.forms import LoginForm
+from app.forms import UnsubForm
 
 
 @app.route('/')
@@ -16,4 +16,5 @@ def signup():
 
 @app.route('/unsub', methods=['GET', 'POST'])
 def unsub():
-    return render_template('unsub.html', title='Unsubscribe')
+    form = UnsubForm()
+    return render_template('unsub.html', title='Unsubscribe', form=form)
