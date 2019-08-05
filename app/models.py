@@ -27,8 +27,7 @@ class Post(db.Model):
 
 
 def import_user(user_email, user_first_name, user_rapper_id):
-    user = User(email=user_email, first_name=user_first_name,
-                rapper_id=user_rapper_id)
+    user = User(email=user_email, rapper_id=user_rapper_id)
     db.session.add(user)
     db.session.commit()
 
@@ -46,5 +45,8 @@ def delete_user(user_email):
 
 
 def clear_posts():
-    Post.query.delete()
-    db.session.commit()
+    try:
+        Post.query.delete()
+        db.session.commit()
+    except:
+        db.session.rollback()
