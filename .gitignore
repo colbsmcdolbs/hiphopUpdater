@@ -206,3 +206,5 @@ dmypy.json
 .history
 
 # End of https://www.gitignore.io/api/flask,python,database,visualstudiocode
+app.db
+*.db

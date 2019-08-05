@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert" >&times;</button>
+    {{ message }}
+  </div>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
     <h1>Sorry to see you leave...</h1>
     <br />
     <h3>Enter your email address and you will no longer receive our records.</h3>
