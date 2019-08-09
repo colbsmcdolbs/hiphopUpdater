@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
-from app.forms import UnsubForm
-from app.models import User, delete_user
+from app.forms import UnsubForm,SignUpForm
+from app.models import User, Rapper, delete_user, import_user
 
 
 @app.route('/')
@@ -12,7 +12,14 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('signup.html', title='Sign Up')
+    form = SignUpForm()
+    if form.validate_on_submit():
+        rappers = form.rappers.data
+        email = form.email.data
+        for r in rappers:
+            import_user(email, rappers)
+        return redirect(url_for('unsubsuccess'))
+    return render_template('signup.html', title='Sign Up', form=form)
 
 
 @app.route('/unsub', methods=['GET', 'POST'])

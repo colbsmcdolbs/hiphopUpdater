@@ -1,4 +1,5 @@
 {% extends 'bootstrap/base.html' %}
+{% import "flask_select2/lib.html" as select2 %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,7 @@
     <title>{{ title }}</title>
     {% block styles %}
     {{super()}}
+    {{ select2.form_css() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/app.css') }}">
     {% endblock %}
   </head>
@@ -42,6 +44,7 @@
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     {{super()}}
+    {{ select2.form_js() }}
     {% endblock %}
   </body>
 </html>

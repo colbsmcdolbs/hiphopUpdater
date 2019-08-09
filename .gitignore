@@ -208,3 +208,4 @@ dmypy.json
 # End of https://www.gitignore.io/api/flask,python,database,visualstudiocode
 app.db
 *.db
+.vscode/settings.json

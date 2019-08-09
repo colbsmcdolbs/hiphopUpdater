@@ -8,6 +8,9 @@ class Rapper(db.Model):
     def __repr__(self):
         return '<Rapper {}>'.format(self.name)
 
+    def __unicode__(self):
+        return self.name
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,16 +29,22 @@ class Post(db.Model):
         return '<Post {}>'.format(self.post_id)
 
 
-def import_user(user_email, user_first_name, user_rapper_id):
-    user = User(email=user_email, rapper_id=user_rapper_id)
-    db.session.add(user)
-    db.session.commit()
+def import_user(user_email, user_rapper_id):
+    try:
+        user = User(email=user_email, rapper_id=user_rapper_id)
+        db.session.add(user)
+        db.session.commit()
+    except:
+        db.session.rollback()
 
 
 def import_post(user_post_id):
-    post = Post(post_id=user_post_id)
-    db.session.add(post)
-    db.session.commit()
+    try:
+        post = Post(post_id=user_post_id)
+        db.session.add(post)
+        db.session.commit()
+    except:
+        db.session.rollback()
 
 
 def delete_user(user_email):

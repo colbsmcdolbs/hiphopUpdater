@@ -16,6 +16,7 @@
     <h1>Sorry to see you leave...</h1>
     <br />
     <h3>Enter your email address and you will no longer receive our records.</h3>
+    <br>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -25,6 +26,6 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ form.submit(class_="btn btn-primary") }}</p>
     </form>
 {% endblock %}
