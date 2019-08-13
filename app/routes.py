@@ -17,7 +17,7 @@ def signup():
         rappers = form.rappers.data
         email = form.email.data
         for r in rappers:
-            import_user(email, rappers)
+            import_user(email, r.id)
         return redirect(url_for('unsubsuccess'))
     return render_template('signup.html', title='Sign Up', form=form)
 

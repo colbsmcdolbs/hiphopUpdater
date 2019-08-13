@@ -6,7 +6,7 @@ class Rapper(db.Model):
     name = db.Column(db.String(64), index=True, unique=True)
 
     def __repr__(self):
-        return '<Rapper {}>'.format(self.name)
+        return '{}'.format(self.name)
 
     def __unicode__(self):
         return self.name
