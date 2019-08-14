@@ -18,7 +18,7 @@ def signup():
         email = form.email.data
         for r in rappers:
             import_user(email, r.id)
-        return redirect(url_for('unsubsuccess'))
+        return redirect(url_for('success'))
     return render_template('signup.html', title='Sign Up', form=form)
 
 
@@ -31,10 +31,10 @@ def unsub():
             flash('That email is not contained in our records.')
             return redirect(url_for('unsub'))
         delete_user(form.email.data)
-        return redirect(url_for('unsubsuccess'))
+        return redirect(url_for('success'))
     return render_template('unsub.html', title='Unsubscribe', form=form)
 
 
-@app.route('/unsubsuccess')
+@app.route('/success')
 def unsubsuccess():
-    return render_template('unsubsuccess.html', title='Success!')
+    return render_template('success.html', title='Success!')
