@@ -31,9 +31,11 @@ def scrape():
                                     html=html,
                                     subject=subject)
                             conn.send(msg)
-                            #You would think that after a rapper is found that the
-                            #loop should close, but some artists have featured artists
-                            #in their songs, so they could still miss out.
+                            #############################################################
+                            #You would think that after a rapper is found that the      #
+                            #loop should close, but some artists have featured artists  #
+                            #in their songs, so they could still miss out.              #
+                            #############################################################
                     import_post(post.id)
 
 

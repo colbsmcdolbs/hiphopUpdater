@@ -1,4 +1,5 @@
 from app import db
+from sqlalchemy import exc
 
 
 class Rapper(db.Model):
@@ -34,7 +35,7 @@ def import_user(user_email, user_rapper_id):
         user = User(email=user_email, rapper_id=user_rapper_id)
         db.session.add(user)
         db.session.commit()
-    except:
+    except exc.SQLAlchemyError:
         db.session.rollback()
 
 
@@ -43,7 +44,7 @@ def import_post(user_post_id):
         post = Post(post_id=user_post_id)
         db.session.add(post)
         db.session.commit()
-    except:
+    except exc.SQLAlchemyError:
         db.session.rollback()
 
 
@@ -57,5 +58,5 @@ def clear_posts():
     try:
         Post.query.delete()
         db.session.commit()
-    except:
+    except exc.SQLAlchemyError:
         db.session.rollback()
