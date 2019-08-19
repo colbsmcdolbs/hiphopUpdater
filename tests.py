@@ -4,7 +4,7 @@ import unittest
 
 from config import basedir
 from sqlalchemy import exc
-from app import app, db, mail
+from app import db, mail
 from app.models import (User, Post, Rapper, import_user, delete_user,
     import_post, clear_posts)
 from app.scraper import login, generate_subject, send_email
