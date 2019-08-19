@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import db
-from app.forms import UnsubForm, SignUpForm
+from app.main.forms import UnsubForm, SignUpForm
 from app.models import User, delete_user, import_user
 from app.main import bp
 
