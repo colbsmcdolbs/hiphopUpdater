@@ -36,5 +36,5 @@ def unsub():
 
 
 @app.route('/success')
-def unsubsuccess():
+def success():
     return render_template('success.html', title='Success!')
