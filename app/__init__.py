@@ -7,49 +7,30 @@ from flask_bootstrap import Bootstrap
 from flask_select2 import Select2
 
 
-db = SQLAlchemy()
+app = Flask(__name__)
+app.config.from_object(Config)
+db = SQLAlchemy(app)
 select2 = Select2()
-migrate = Migrate()
-mail = Mail()
-bootstrap = Bootstrap()
+select2.init_app(app)
+migrate = Migrate(app, db)
+mail = Mail(app)
+bootstrap = Bootstrap(app)
+
+from app import routes, models, errors
+from app.scraper import scrape
+from app.models import clear_posts
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
+clear_scheduler = BackgroundScheduler(daemon=True)
+post_scheduler = BackgroundScheduler(daemon=True)
 
-    db.init_app(app)
-    migrate.init_app(app, db)
-    select2.init_app(app)
-    mail.init_app(app)
-    bootstrap.init_app(app)
-
-    from app.errors import bp as errors_bp
-    app.register_blueprint(errors_bp)
-
-    from app.main import bp as main_bp
-    app.register_blueprint(main_bp)
+clear_scheduler.add_job(clear_posts, 'interval', days=1)
+post_scheduler.add_job(scrape, 'interval', minutes=5)
+clear_scheduler.start()
+post_scheduler.start()
 
 
-
-    if not app.debug and not app.testing:
-        from app.scraper import scrape
-        from app.models import clear_posts
-        import atexit
-        from apscheduler.schedulers.background import BackgroundScheduler
-        from app.errors import bp as errors_bp
-        app.register_blueprint(errors_bp)
-
-        clear_scheduler = BackgroundScheduler(daemon=True)
-        post_scheduler = BackgroundScheduler(daemon=True)
-
-        clear_scheduler.add_job(clear_posts, 'interval', days=1)
-        post_scheduler.add_job(scrape, 'interval', minutes=5)
-        clear_scheduler.start()
-        post_scheduler.start()
-        atexit.register(lambda: post_scheduler.shutdown())
-        atexit.register(lambda: clear_scheduler.shutdown())
-
-    return app
-
-from app import models
+atexit.register(lambda: post_scheduler.shutdown())
+atexit.register(lambda: clear_scheduler.shutdown())

@@ -4,7 +4,7 @@ import unittest
 
 from config import basedir
 from sqlalchemy import exc
-from app import db, mail
+from app import app, db, mail
 from app.models import (User, Post, Rapper, import_user, delete_user,
     import_post, clear_posts)
 from app.scraper import login, generate_subject, send_email
@@ -76,15 +76,6 @@ class TestCase(unittest.TestCase):
         import_post(post_id_2)
         clear_posts()
         self.assertFalse(Post.query.filter_by(post_id=post_id_1).first())
-
-
-    ####################################
-    #Checking PRAW Functions Unit Tests#
-    ####################################
-    #def test_praw_login(self):
-
-
-    #def test_praw_scrape(self):
 
     #####################################
     #Checking Email Functions Unit Tests#
