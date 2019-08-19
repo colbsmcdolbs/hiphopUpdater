@@ -25,8 +25,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 clear_scheduler = BackgroundScheduler(daemon=True)
 post_scheduler = BackgroundScheduler(daemon=True)
+
 clear_scheduler.add_job(clear_posts, 'interval', days=1)
-post_scheduler.add_job(scrape, 'interval', minutes=20)
+post_scheduler.add_job(scrape, 'interval', minutes=5)
 clear_scheduler.start()
 post_scheduler.start()
 

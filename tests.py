@@ -4,14 +4,17 @@ import unittest
 
 from config import basedir
 from sqlalchemy import exc
-from app import app, db
+from app import app, db, mail
 from app.models import (User, Post, Rapper, import_user, delete_user,
     import_post, clear_posts)
-from app.scraper import login, generate_subject
+from app.scraper import login, generate_subject, send_email
+
+email = "fake@gmail.com"
+emails = ["fake@gmails.com"]
 
 
 class TestCase(unittest.TestCase):
-    
+
     def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
@@ -86,7 +89,15 @@ class TestCase(unittest.TestCase):
     #####################################
     #Checking Email Functions Unit Tests#
     #####################################
-    #def test_send_email(self):
+
+    def test_send_email(self):
+        user = User(email=email, rapper_id="1")
+        import_user(user.email, user.rapper_id)
+        subscribed = User.query.filter(User.rapper_id == "1")
+        with mail.record_messages() as outbox:
+            send_email(subscribed, "Kanye West", "1234")
+            assert len(outbox) == 1
+            assert outbox[0].subject == "Fresh Kanye West Awaits You"
 
     def test_generate_subject(self):
         self.assertEqual("Fresh Young Thug Awaits You", generate_subject("Young Thug"))
