@@ -7,11 +7,6 @@ from flask_bootstrap import Bootstrap
 from flask_select2 import Select2
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
-from app import routes, models
-from app.scraper import scrape
-from app.models import clear_posts
-import atexit
-from apscheduler.schedulers.background import BackgroundScheduler
 
 
 db = SQLAlchemy()
@@ -32,6 +27,12 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
 
     if not app.debug and not app.testing:
+        from app import routes, models
+        from app.scraper import scrape
+        from app.models import clear_posts
+        import atexit
+        from apscheduler.schedulers.background import BackgroundScheduler
+
         clear_scheduler = BackgroundScheduler(daemon=True)
         post_scheduler = BackgroundScheduler(daemon=True)
 
