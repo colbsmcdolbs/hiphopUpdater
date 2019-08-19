@@ -77,6 +77,15 @@ class TestCase(unittest.TestCase):
         clear_posts()
         self.assertFalse(Post.query.filter_by(post_id=post_id_1).first())
 
+
+    ####################################
+    #Checking PRAW Functions Unit Tests#
+    ####################################
+    #def test_praw_login(self):
+
+
+    #def test_praw_scrape(self):
+
     #####################################
     #Checking Email Functions Unit Tests#
     #####################################
