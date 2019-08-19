@@ -5,8 +5,6 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_select2 import Select2
-from app.errors import bp as errors_bp
-app.register_blueprint(errors_bp)
 
 
 db = SQLAlchemy()
@@ -21,17 +19,18 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     db.init_app(app)
-    select2.init_app(app)
     migrate.init_app(app, db)
+    select2.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
 
     if not app.debug and not app.testing:
-        from app import routes, models
         from app.scraper import scrape
         from app.models import clear_posts
         import atexit
         from apscheduler.schedulers.background import BackgroundScheduler
+        from app.errors import bp as errors_bp
+        app.register_blueprint(errors_bp)
 
         clear_scheduler = BackgroundScheduler(daemon=True)
         post_scheduler = BackgroundScheduler(daemon=True)
@@ -44,3 +43,5 @@ def create_app(config_class=Config):
         atexit.register(lambda: clear_scheduler.shutdown())
 
     return app
+
+from app import routes, models
