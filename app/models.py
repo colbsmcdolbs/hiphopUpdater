@@ -48,6 +48,13 @@ def import_post(user_post_id):
         db.session.rollback()
 
 
+def check_enrolled_emails(rapper_id):
+    if User.query.filter_by(rapper_id=rapper_id).first():
+        return True
+    else:
+        return False
+
+
 def delete_user(user_email):
     if User.query.filter_by(email=user_email).first():
         User.query.filter_by(email=user_email).delete()

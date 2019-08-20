@@ -1,5 +1,5 @@
 import praw
-from app.models import Rapper, User, Post, import_post
+from app.models import Rapper, User, Post, import_post, check_enrolled_emails
 from app import mail
 from flask_mail import Message
 
@@ -22,7 +22,7 @@ def scrape():
         # checks for duplicate posts
         if post.id not in saved_posts:
             for rapper in rappers:
-                if rapper.name in post.title and 'FRESH' in post.title:
+                if rapper.name in post.title and 'FRESH' in post.title and check_enrolled_emails(rapper.id):
                     subscribed = User.query.filter(User.rapper_id == rapper.id)
                     send_email(subscribed, rapper.name, post.url)
             import_post(post.id)
