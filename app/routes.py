@@ -9,7 +9,7 @@ from app.models import User, Rapper, delete_user, import_user
 @app.route('/index')
 def index():
     jumbo_tron = os.path.join('static', 'jumbotron')
-    this_jumbotron = os.path.join(app.config[jumbo_tron, 'boombox.jpg')
+    this_jumbotron = os.path.join(jumbo_tron, 'boombox.jpg')
     return render_template('index.html', title='Home', jumbotron=this_jumbotron)
 
 
