@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
+import os
 from app.forms import UnsubForm, SignUpForm
 from app.models import User, Rapper, delete_user, import_user
 
@@ -7,7 +8,9 @@ from app.models import User, Rapper, delete_user, import_user
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    jumbo_tron = os.path.join('static', 'jumbotron')
+    JumboTron = os.path.join(app.config[jumbo_tron, 'boombox.jpg')
+    return render_template('index.html', title='Home', jumbotron=JumboTron)
 
 
 @app.route('/signup', methods=['GET', 'POST'])

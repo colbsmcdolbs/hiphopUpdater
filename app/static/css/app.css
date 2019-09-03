@@ -3,3 +3,23 @@ body {
     font-size:18px;
     color:#444;
 }
+
+.jumbotron {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+  
+.jumbotron-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+.jumbotron-content {
+    color: white;
+    position: relative;
+}
