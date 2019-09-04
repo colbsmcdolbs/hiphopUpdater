@@ -24,7 +24,7 @@ class SignUpForm(FlaskForm):
         fields=['name'],
         order_by=[Rapper.name.asc()],
         page_size=5,
-        placeholder="Select your favorite rappers...")
+        placeholder="Start Typing your favorite rappers...")
 
     select2.add_loader(loader=rapper_loader)
 
