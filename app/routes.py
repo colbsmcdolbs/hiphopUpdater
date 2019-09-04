@@ -8,9 +8,7 @@ from app.models import User, Rapper, delete_user, import_user
 @app.route('/')
 @app.route('/index')
 def index():
-    jumbo_tron = os.path.join('static', 'jumbotron')
-    this_jumbotron = os.path.join(jumbo_tron, 'boombox.jpg')
-    return render_template('index.html', title='Home', jumbotron=this_jumbotron)
+    return render_template('index.html', title='Home')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
