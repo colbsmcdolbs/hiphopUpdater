@@ -2,7 +2,7 @@ aigpy==2019.8.2.0
 alembic==1.0.11
 APScheduler==3.6.1
 blinker==1.4
-certifi==2019.6.16
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
